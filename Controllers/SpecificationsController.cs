@@ -14,6 +14,7 @@ namespace SpecificationAPI.Controllers
     [ApiController]
     public class SpecificationsController : ControllerBase
     {
+        static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(SpecificationsController));
         private readonly ISpecificationRepo _context;
 
         public SpecificationsController(ISpecificationRepo context)
@@ -78,6 +79,7 @@ namespace SpecificationAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<SpecificationTable>> PostSpecificationTable(SpecificationTable specificationTable)
         {
+            _log4net.Info("  Specification Initiated");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -91,6 +93,7 @@ namespace SpecificationAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSpecificationTable(string id)
         {
+            _log4net.Info("This id: "+id+"got deleted");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
